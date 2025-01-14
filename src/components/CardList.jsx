@@ -2,14 +2,22 @@ import { useGlobalContext } from "./GlobalContext";
 import { Card } from "./Card";
 
 export function CardList() {
-  const { dataFromApi } = useGlobalContext();
+  const { dataFromApi, selectValue } = useGlobalContext();
 
   // Console log per controllare i dati presi da API
-  // console.log(dataFromApi);
+  console.log(dataFromApi);
+
+  // Filtro per tipo selezionato
+  const arrayFiltrato = dataFromApi.filter((d) => {
+    // Se "entrambi" è selezionato, mostra sia film che serie
+    if (selectValue === "entrambi") return true;
+    return d.type === selectValue;
+  });
+
   return (
     <div>
-      {dataFromApi !== undefined &&
-        dataFromApi.map((obj) => (
+      {arrayFiltrato !== undefined &&
+        arrayFiltrato.map((obj) => (
           <Card
             key={obj.id}
             title={obj.type === "movie" ? obj.title : obj.name}
