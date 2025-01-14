@@ -6,13 +6,19 @@ export function CardList() {
 
   return (
     <div>
-      {dataFromApi.results !== undefined && dataFromApi.results.map((movie) => (
-        <Card
-          key={movie.id}
-          title={movie.title}
-          original_title={movie.original_title}
-        />
-      ))}
+      {dataFromApi !== undefined &&
+        dataFromApi.map((obj) => (
+          <Card
+            key={obj.id}
+            title={obj.type === "movie" ? obj.title : obj.name}
+            original_title={
+              obj.type === "movie" ? obj.original_title : obj.original_name
+            }
+            original_language={obj.original_language}
+            vote_average={obj.vote_average}
+            type={obj.type}
+          />
+        ))}
     </div>
   );
 }

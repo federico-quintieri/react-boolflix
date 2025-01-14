@@ -11,5 +11,24 @@ export const fetchMovies = async (query) => {
       query, // La query di ricerca inserita dall'utente.
     },
   });
-  return response.data;
+  // Restituisco un map della data dove per ciascun oggetto aggiungo una proprietà che specifica che é un film
+  return response.data.results.map((movie) => ({
+    ...movie,
+    type: "movie",
+  }));
+};
+
+export const fetchTvSeries = async (query) => {
+  const response = await axios.get(`${BASE_URL}/search/tv`, {
+    // Configurazione dei parametri della richiesta:
+    params: {
+      api_key: API_KEY, // La chiave API necessaria per l'autenticazione.
+      query, // La query di ricerca inserita dall'utente.
+    },
+  });
+  // Restituisco un map della data dove per ciascun oggetto aggiungo una proprietà che specifica che é una serie tv
+  return response.data.results.map((tv) => ({
+    ...tv,
+    type: "tv",
+  }));
 };

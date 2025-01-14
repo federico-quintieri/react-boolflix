@@ -1,6 +1,6 @@
 import { useGlobalContext } from "./GlobalContext";
 import { useQuery } from "@tanstack/react-query";
-import { fetchMovies } from "../services/API";
+import { fetchMovies, fetchTvSeries } from "../services/API";
 import { useEffect } from "react";
 
 export function SearchBar() {
@@ -10,7 +10,15 @@ export function SearchBar() {
   // Strutturo fetch API con useQuery
   const { data, refetch, isSuccess } = useQuery({
     queryKey: ["movies", searchQuery],
-    queryFn: () => fetchMovies(searchQuery),
+    queryFn: async () => {
+      // Eseguo entrambe le chiamate API in parallelo
+    const [movies, tv] = await Promise.all([
+      fetchMovies(searchQuery),
+      fetchTvSeries(searchQuery),
+    ]);
+    // Combino i due array
+    return [...movies, ...tv];
+    },
     enabled: false, // Disabilito il fetch automatico
   });
 
