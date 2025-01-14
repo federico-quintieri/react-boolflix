@@ -3,7 +3,9 @@ import { Card } from "./Card";
 
 export function CardList() {
   const { dataFromApi } = useGlobalContext();
-  console.log(dataFromApi);
+
+  // Console log per controllare i dati presi da API
+  // console.log(dataFromApi);
   return (
     <div>
       {dataFromApi !== undefined &&

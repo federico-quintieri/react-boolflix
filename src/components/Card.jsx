@@ -1,5 +1,6 @@
 import Flag from "react-world-flags";
 import { languageToFlag } from "../utilities/Bandiere";
+import { renderStars } from "./Stelline";
 
 // Url base del immagine
 const baseUrlImage = "https://image.tmdb.org/t/p/";
@@ -47,7 +48,7 @@ export function Card({
       {/* Valutazione */}
       {vote_average && (
         <p>
-          <strong>Rating:</strong> {(vote_average / 2).toFixed(2)}/5
+          {renderStars(vote_average)} - {(vote_average / 2).toFixed(2)}/5 
         </p>
       )}
     </div>
