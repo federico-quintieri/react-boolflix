@@ -1,12 +1,18 @@
 import Flag from "react-world-flags";
 import { languageToFlag } from "../utilities/Bandiere";
 
+// Url base del immagine
+const baseUrlImage = "https://image.tmdb.org/t/p/";
+// Dimensione immagine
+const w = "w500";
+
 export function Card({
   title,
   original_title,
   original_language,
   vote_average,
   type,
+  image,
 }) {
   return (
     <div>
@@ -31,6 +37,13 @@ export function Card({
           />
         </p>
       )}
+      {/* Immagine poster */}
+      {image ? (
+        <img src={`${baseUrlImage}${w}${image}`} alt={`${title}`} />
+      ) : (
+        <img src="/Immagine poster non trovata.png" alt="Placeholder image" />
+      )}
+
       {/* Valutazione */}
       {vote_average && (
         <p>

@@ -3,7 +3,7 @@ import { Card } from "./Card";
 
 export function CardList() {
   const { dataFromApi } = useGlobalContext();
-
+  console.log(dataFromApi);
   return (
     <div>
       {dataFromApi !== undefined &&
@@ -17,6 +17,7 @@ export function CardList() {
             original_language={obj.original_language}
             vote_average={obj.vote_average}
             type={obj.type}
+            image={obj.poster_path}
           />
         ))}
     </div>
