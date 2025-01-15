@@ -16,41 +16,56 @@ export function Card({
   image,
 }) {
   return (
-    <div>
-      {/* Tipo film o serie tv */}
-      <span>{type.toUpperCase()}</span>
-      {/* Titolo principale */}
-      <h3>{title || "N/A"}</h3>
-      {/* Titolo originale */}
-      {original_title && (
-        <p>
-          <strong>Titolo Originale:</strong> {original_title}
-        </p>
-      )}
-      {/* Lingua originale */}
-      {original_language && (
-        <p>
-          Lingua Originale:{" "}
-          <Flag
-            code={languageToFlag[original_language]}
-            alt={original_language}
-            style={{ width: 30, height: 20 }}
-          />
-        </p>
-      )}
+    <div className="max-w-xs mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       {/* Immagine poster */}
-      {image ? (
-        <img src={`${baseUrlImage}${w}${image}`} alt={`${title}`} />
-      ) : (
-        <img src="/Immagine poster non trovata.png" alt="Placeholder image" />
-      )}
-
-      {/* Valutazione */}
-      {vote_average && (
-        <p>
-          {renderStars(vote_average)} - {(vote_average / 2).toFixed(2)}/5 
-        </p>
-      )}
+      <div className="relative">
+        {image ? (
+          <img
+            src={`${baseUrlImage}${w}${image}`}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <img
+            src="/Immagine poster non trovata.png"
+            alt="Placeholder"
+            className="w-full h-full object-cover"
+          />
+        )}
+        {/* Valutazione */}
+        {vote_average && (
+          <div className="absolute -bottom-7 left-14  text-yellow-400 text-xs px-2 py-1 rounded">
+            {renderStars(vote_average)}
+          </div>
+        )}
+      </div>
+      <div className="p-4 pt-1">
+        {/* Tipo film o serie tv */}
+        <span className="text-sm text-gray-400 uppercase">
+          {type.toUpperCase()}
+        </span>
+        {/* Titolo principale */}
+        <h3 className="mt-1 text-xl font-semibold text-white">
+          {title || "N/A"}
+        </h3>
+        {/* Titolo originale */}
+        {original_title && (
+          <p className="text-sm text-gray-400 mt-2">
+            <strong>Titolo Originale:</strong> {original_title}
+          </p>
+        )}
+        {/* Lingua originale */}
+        {original_language && (
+          <p className="text-sm text-gray-400 mt-1">
+            
+            <Flag
+              code={languageToFlag[original_language]}
+              alt={original_language}
+              style={{ width: 20, height: 15 }}
+            />
+          </p>
+        )}
+      </div>
     </div>
   );
 }
